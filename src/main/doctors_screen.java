@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 import java.awt.Color;
@@ -45,51 +40,21 @@ public class doctors_screen extends javax.swing.JFrame {
     private void refresh()
     {
         x = 0;
-        Connection connection = null;
-        Statement statement = null;
-        
- 
-        // Step 1: Loading or 
-        // registering Oracle JDBC driver class
-        try {
- 
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        }
-        catch(ClassNotFoundException cnfex) {
- 
-            System.out.println("Problem in loading or "
-                    + "registering MS Access JDBC driver");
-            cnfex.printStackTrace();
-        }
-        
-        
-        // Step 2: Opening database connection
+
         try {
             x = x + 1; 
-            //TODO Fix Date Display
+            
             String[] columnNames = {"DocID","FName","SName","Field","Ward"};
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnIdentifiers(columnNames);
             doctorTable.setModel(model);
-            
-            String msAccDB = System.getProperty("user.dir")+"\\src\\main\\"
-                    + "StJohnDatabase_PAT.accdb";
-            String dbURL = "jdbc:ucanaccess://"
-                    + msAccDB; 
- 
-            // Step 2.A: Create and 
-            // get connection using DriverManager class
-            connection = DriverManager.getConnection(dbURL); 
- 
-            // Step 2.B: Creating JDBC Statement 
-            statement = connection.createStatement();
- 
-            // Step 2.C: Executing SQL and 
+
             // retrieve data into ResultSet
-            resultSet = statement.executeQuery("SELECT * FROM tblDoctor");
+            String query = "SELECT * FROM tblDoctor";
+            resultSet = M.refresh(query);
  
  
-            // processing returned data and printing into console
+            //Loops through resultSet and adds relevent data to the table
             while(resultSet.next()) {
                 int DocID = resultSet.getInt(1);
                 String FName = resultSet.getString(2);
@@ -108,16 +73,10 @@ public class doctors_screen extends javax.swing.JFrame {
             sqlex.printStackTrace();
         }
         finally {
-            // Step 3: Closing database connection
+
             try {
-                if(null != connection) {
-                    // cleanup resources, once after processing
                     resultSet.close();
-                    statement.close();
- 
-                    // and then finally close connection
-                    connection.close();
-                }
+
             }
             catch (SQLException sqlex) {
                 sqlex.printStackTrace();
@@ -125,27 +84,7 @@ public class doctors_screen extends javax.swing.JFrame {
         }
     }
     
-    private boolean stringCheck(String s)
-   {
-       boolean check = true;
-       
-       if(s.isEmpty())
-       {
-           check = false;
-           
-       }
-       else{
-        for(int i = 0; i < s.length();i++)
-        {
-            char x = s.charAt(i);
-            if(Character.isDigit(x) == true)
-            {
-                check = false;
-            }
-        }
-       }
-       return check;
-   }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -454,17 +393,17 @@ public class doctors_screen extends javax.swing.JFrame {
         try
         {
             String name = nameT.getText();
-        if(stringCheck(name) == false)
+        if(M.stringCheck(name) == false)
         {
             throw new Exception("There was a issue with the name");
         }
         String Sname = sNameT.getText();
-        if(stringCheck(Sname) == false)
+        if(M.stringCheck(Sname) == false)
         {
             throw new Exception("There was a issue with the surname");
         }
         String field = fieldT.getText();
-        if(stringCheck(field) == false)
+        if(M.stringCheck(field) == false)
         {
             throw new Exception("There was a issue with the field entry");
         }

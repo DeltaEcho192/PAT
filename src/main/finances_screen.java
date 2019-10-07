@@ -416,7 +416,6 @@ public class finances_screen extends javax.swing.JFrame {
             {
                 throw new Exception("Hostpital Cost was less than 0");
             }
-            //TODO Add table check
             Object payM = payMD.getSelectedItem();
             String payMstr = payM.toString();
             boolean paid = paidCB.isSelected();
