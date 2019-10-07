@@ -142,7 +142,7 @@ public class help_screen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    //Calls method from main class and uses a integer to define what section of the help menu is to be displayed.
     private void backBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBActionPerformed
         main_screen MainSc = new main_screen();
         MainSc.setVisible(true);

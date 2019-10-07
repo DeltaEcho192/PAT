@@ -448,18 +448,15 @@ public class finances_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_upBActionPerformed
 
     private void downBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downBActionPerformed
-        // TODO add your handling code here:
         gotoRow(z+1);
         z = z + 1;
     }//GEN-LAST:event_downBActionPerformed
 
     private void refreshBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBActionPerformed
-        // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_refreshBActionPerformed
 
     private void dRecordBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dRecordBActionPerformed
-        // TODO add your handling code here:
         String query = "DELETE FROM tblFinance WHERE FinID = "+financeTable.getValueAt(z,0);
         M.executeSQL(query);
         x = x - 1;
@@ -467,6 +464,8 @@ public class finances_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_dRecordBActionPerformed
 
     private void eRecordBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eRecordBActionPerformed
+        //Sets DateFormat
+        //TODO do validation checks for the dates
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try
         {
@@ -474,12 +473,14 @@ public class finances_screen extends javax.swing.JFrame {
             int i = 0;
             if(adDate.getDate() != null)
             {
+                //Gets date and formats it to a string.
                 Date aDate = adDate.getDate();
                 String aDatestr = dateFormat.format(aDate);
                 query += "AdmitDay = '"+aDatestr+"',";
             }
             if(disDate.getDate() != null)
             {
+                //Gets date and formats it to a string.
                 Date dDate = disDate.getDate();
                 String dDatestr = dateFormat.format(dDate);  
                 query += "DisDay = '"+dDatestr+"',";
@@ -509,12 +510,15 @@ public class finances_screen extends javax.swing.JFrame {
             }
             Object payM = payMD.getSelectedItem();
             String payMstr = payM.toString();
+            //Checks if selected value is the same as the record in the table
             if(!payMstr.equals(financeTable.getValueAt(z,5)))
             {
                 query += "PayMethod = '"+payMstr+"',";
             }
-
+            
+            
             boolean paid = paidCB.isSelected();
+            //Checks if selected value is the same as the record in the table
             if(!financeTable.getValueAt(z,6).equals(paid))
               {
                 query += "Paid = '"+paid+"',";
@@ -541,8 +545,8 @@ public class finances_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_backBActionPerformed
 
     private void financialBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_financialBActionPerformed
-
-
+        //If record is paid then it is added to the total of what the hospital has recieved.
+        //If not then it adds it to the outstanding total.
         int total = 0;
         int outstanding = 0;
         for(int i = 0;i < financeTable.getRowCount();i++)
@@ -550,13 +554,15 @@ public class finances_screen extends javax.swing.JFrame {
             int treatCost = Integer.parseInt(financeTable.getValueAt(i,3).toString());
             int hostpitalCost = Integer.parseInt(financeTable.getValueAt(i,4).toString());
             boolean paid = Boolean.parseBoolean(financeTable.getValueAt(i,6).toString());
-            
+            //Checks if the bill has been paid
             if(paid == true)
             {
+                //If paid then it adds the cost to a total
                 total += treatCost + hostpitalCost;
             }
             else
             {
+                //If not then it adds it to the outstandin total
                 outstanding += treatCost + hostpitalCost;
             }
         }

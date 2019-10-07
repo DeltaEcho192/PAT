@@ -416,25 +416,20 @@ public class doctors_screen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBActionPerformed
-        // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_refreshBActionPerformed
 
     private void firstBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstBActionPerformed
-        // TODO add your handling code here:
         z = 0;
         gotoRow(0);
     }//GEN-LAST:event_firstBActionPerformed
 
     private void lastBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastBActionPerformed
-        // TODO add your handling code here:
-        System.out.println(x);
         z = x-2;
         gotoRow(x-2);
     }//GEN-LAST:event_lastBActionPerformed
 
     private void upBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upBActionPerformed
-        // TODO add your handling code here:
         if(z > 0)
         {
             gotoRow(z-1);
@@ -443,13 +438,11 @@ public class doctors_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_upBActionPerformed
 
     private void downBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downBActionPerformed
-        // TODO add your handling code here:
         gotoRow(z+1);
         z = z + 1;
     }//GEN-LAST:event_downBActionPerformed
 
     private void dismissBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dismissBActionPerformed
-        // TODO add your handling code here:
         String query = "DELETE FROM tblDoctor WHERE DocID = "+doctorTable.getValueAt(z,0);
         M.executeSQL(query);
         x = x - 1;
@@ -457,7 +450,7 @@ public class doctors_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_dismissBActionPerformed
 
     private void hireBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hireBActionPerformed
-        // TODO add your handling code here:
+        //Checks all the entered values and if ok then inserts the data into the database
         try
         {
             String name = nameT.getText();
@@ -492,7 +485,7 @@ public class doctors_screen extends javax.swing.JFrame {
     }//GEN-LAST:event_hireBActionPerformed
 
     private void editBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBActionPerformed
-        // TODO add your handling code here:
+        //Checks if the field has been changed. If changed it adds the value to the update statment
         try
         {
             String query = "UPDATE tblDoctor SET ";
