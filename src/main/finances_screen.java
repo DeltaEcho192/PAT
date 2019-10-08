@@ -406,12 +406,12 @@ public class finances_screen extends javax.swing.JFrame {
             {
                 throw new Exception("Admistions date cant be after discharge Date");
             }
-            int tCost = Integer.parseInt(treatCostT.getText());
+            Double tCost = M.round(Double.parseDouble(treatCostT.getText()), 2);
             if(tCost < 0)
             {
                 throw new Exception("The treatment Cost was less than 0");
             }
-            int hCost = Integer.parseInt(hospCostT.getText());
+            Double hCost = M.round(Double.parseDouble(hospCostT.getText()),2);
             if(hCost < 0)
             {
                 throw new Exception("Hostpital Cost was less than 0");
@@ -486,9 +486,9 @@ public class finances_screen extends javax.swing.JFrame {
             }
             if(!treatCostT.getText().isEmpty())
             {
-                if(Integer.parseInt(treatCostT.getText()) > 0)
+                if(Double.parseDouble(treatCostT.getText()) > 0)
                 {
-                    query += "TreatCost = "+Integer.parseInt(treatCostT.getText())+",";
+                    query += "TreatCost = "+M.round(Double.parseDouble(treatCostT.getText()),2)+",";
                 }
                 else
                 {
@@ -498,9 +498,9 @@ public class finances_screen extends javax.swing.JFrame {
             }
             if(!hospCostT.getText().isEmpty())
             {
-                if(Integer.parseInt(hospCostT.getText()) > 0)
+                if(Double.parseDouble(hospCostT.getText()) > 0)
                 {
-                    query += "StayCost = "+Integer.parseInt(hospCostT.getText())+",";
+                    query += "StayCost = "+M.round(Double.parseDouble(hospCostT.getText()), 2)+",";
                 }
                 else
                 {

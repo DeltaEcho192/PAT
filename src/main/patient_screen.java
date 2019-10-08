@@ -413,7 +413,6 @@ public class patient_screen extends javax.swing.JFrame {
                 x = x + 1;
                 model.addRow(new Object[] {patID,name,Surname,age,gender,bloodtype,allergies,docID,bedNum,diagonis,Treatment,medication});
             }
-              
                     
         }
         catch(SQLException sqlex){

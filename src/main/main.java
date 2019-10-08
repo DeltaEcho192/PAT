@@ -215,16 +215,24 @@ public class main {
         }
         return output;
     }
-        //Method which checks if given strings equal the defult textfield values
-        public boolean loginCheck(String username,String password)
+    //Method which checks if given strings equal the defult textfield values
+    public boolean loginCheck(String username,String password)
+    {
+        boolean check = false;
+        if(username.contentEquals("EmployeeID") && password.contentEquals("Password"))
         {
-            boolean check = false;
-            if(username.contentEquals("EmployeeID") && password.contentEquals("Password"))
-            {
-                check = true;
-            }
-            return check;
+            check = true;
         }
-    
+        return check;
+    }
+        //Rounds off a double values to a given amount of decimal points.
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+}
 }
 

@@ -359,8 +359,8 @@ public class pharmacy_screen extends javax.swing.JFrame {
                 int itemID = resultSet.getInt(1);
                 String itemName = resultSet.getString(3);
                 String itemDescription = resultSet.getString(2);
-                int SellPrice = resultSet.getInt(4);
-                int StockPrice = resultSet.getInt(5);
+                Double SellPrice = resultSet.getDouble(4);
+                Double StockPrice = resultSet.getDouble(5);
                 int itemInvent = resultSet.getInt(6);
                 int itemSold = resultSet.getInt(7);
 
@@ -408,9 +408,9 @@ public class pharmacy_screen extends javax.swing.JFrame {
             }
             if(!sellPriceT.getText().isEmpty())
             {
-                if(Integer.parseInt(sellPriceT.getText()) > 0)
+                if(Double.parseDouble(sellPriceT.getText()) > 0)
                 {
-                    query += "itemSellPrice = "+Integer.parseInt(sellPriceT.getText())+",";
+                    query += "itemSellPrice = "+M.round(Double.parseDouble(sellPriceT.getText()),2)+",";
                 }
                 else
                 {
@@ -420,9 +420,9 @@ public class pharmacy_screen extends javax.swing.JFrame {
             }
             if(!stockPriceT.getText().isEmpty())
             {
-                if(Integer.parseInt(stockPriceT.getText())>0)
+                if(Double.parseDouble(stockPriceT.getText())>0)
                 {
-                    query += "itemStockPrice = '"+Integer.parseInt(stockPriceT.getText())+"',";
+                    query += "itemStockPrice = '"+M.round(Double.parseDouble(stockPriceT.getText()),2)+"',";
                 }
                 else
                 {
@@ -509,8 +509,8 @@ public class pharmacy_screen extends javax.swing.JFrame {
             {
                 throw new Exception("No description was entered");
             }
-            int sellPrice = Integer.parseInt(sellPriceT.getText());
-            int stockPrice = Integer.parseInt(stockPriceT.getText());
+            Double sellPrice = M.round(Double.parseDouble(sellPriceT.getText()),2);
+            Double stockPrice = M.round(Double.parseDouble(stockPriceT.getText()), 2);
             int itemInv = Integer.parseInt(itemInvT.getText());
             int itemSold = Integer.parseInt(itemSoldT.getText());
 
